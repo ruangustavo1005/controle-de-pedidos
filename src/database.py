@@ -1,9 +1,8 @@
-import os
 import sqlite3
 
 
 def create_if_not_exists():
-    conn = sqlite3.connect(os.getenv("DB_FILE_NAME"))
+    conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
 
     cursor.execute("""
