@@ -27,13 +27,13 @@ jobs:
           pip install pyinstaller
 
       - name: Build Executable
-        run: pyinstaller --onefile --windowed --hidden-import=PySide6 -n app src/main.py
+        run: pyinstaller --onefile --windowed --hidden-import=PySide6 src/main.py
 
       - name: Upload Executable
         uses: actions/upload-artifact@v2
         with:
           name: windows-executable
-          path: dist/app.exe
+          path: dist/main.exe
 
       - name: Create Release
         id: create_release
@@ -52,6 +52,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/app.exe
-          asset_name: app.exe
+          asset_path: ./dist/main.exe
+          asset_name: main.exe
           asset_content_type: application/octet-stream
