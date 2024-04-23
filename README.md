@@ -1,7 +1,7 @@
 # controle-de-pedidos
 gerenciador de pedidos que controla quantidade de produtos a serem produzidos
 
-## fetures:
+## features:
 - [ ] listagem e manutenção de cidade
   - [ ] para o cadastro da cidade, basta o nome
   - [ ] pode ser alterado ou excluído (caso não tenha clientes relacionados)
