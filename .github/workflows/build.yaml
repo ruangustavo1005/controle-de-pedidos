@@ -11,8 +11,6 @@ on:
 jobs:
   build-and-release:
     runs-on: windows-latest
-    env:
-      DB_FILE_NAME: 'database.db'
 
     steps:
       - name: Checkout code
@@ -37,6 +35,7 @@ jobs:
       - name: Build Executable
         run: |
           $env:PYTHONPATH = "${{ github.workspace }}/src;C:\hostedtoolcache\windows\Python\3.12.3\x64\Lib\site-packages"
+          $env:DB_FILE_NAME = "database.db"
           pyinstaller --onefile --windowed --paths $env:PYTHONPATH src/main.py
 
       - name: Upload Executable
