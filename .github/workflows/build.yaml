@@ -27,7 +27,7 @@ jobs:
           pip install pyinstaller
 
       - name: Build Executable
-        run: pyinstaller --onefile --windowed src/main.py
+        run: pyinstaller --onefile --windowed --hidden-import=PySide6 -n app src/main.py
 
       - name: Upload Executable
         uses: actions/upload-artifact@v2
