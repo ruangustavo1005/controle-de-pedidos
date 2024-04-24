@@ -38,12 +38,6 @@ jobs:
         run: |
           Compress-Archive -Path dist/* -DestinationPath dist/build.zip
 
-      - name: Upload Executable
-        uses: actions/upload-artifact@v2
-        with:
-          name: controle-de-pedidos.zip
-          path: dist/build.zip
-
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -61,6 +55,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/main.exe
-          asset_name: controle-de-pedidos.exe
-          asset_content_type: application/octet-stream
+          asset_path: ./dist/build.zip
+          asset_name: controle-de-pedidos.zip
+          asset_content_type: application/zip
