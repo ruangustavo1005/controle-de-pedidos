@@ -10,7 +10,7 @@ from PySide6.QtWidgets import (
     QAbstractItemView,
     QPushButton,
 )
-from PySide6.QtGui import QIntValidator
+from PySide6.QtGui import QIntValidator, QIcon
 from PySide6.QtCore import Qt
 
 from common.gui.core.table_model_default import TableModelDefault
@@ -28,6 +28,7 @@ class BaseListWidget(QWidget):
     ):
         super(BaseListWidget, self).__init__(parent, flags)
         self.setWindowTitle(title)
+        self.setWindowIcon(QIcon("src/img/fav.ico"))
         self.headers = headers
         self.resize(width, height)
         self.base_layout = QVBoxLayout()
@@ -105,7 +106,7 @@ class BaseListWidget(QWidget):
         self.page_field.setFixedWidth(30)
         self.page_field.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.page_field.setValidator(QIntValidator())
-        self.page_field.returnPressed.connect(self.teste)
+        self.page_field.setText("1")
         layout.addWidget(self.page_field)
         
         bar_label = QLabel("/")
@@ -128,9 +129,8 @@ class BaseListWidget(QWidget):
         
         return layout
 
-    def teste(self):
-        text = self.page_field.text()
-        print(f"Você digitou: {text}")
+    def set_page_count(self, page_count: int) -> None:
+        self.last_page_field.setText(str(page_count))
 
     def _get_table_model_instance(self) -> TableModelDefault:
         return TableModelDefault(self.headers)
