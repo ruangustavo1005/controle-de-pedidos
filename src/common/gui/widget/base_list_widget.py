@@ -2,22 +2,15 @@ from typing import List
 
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QIcon, QIntValidator
-from PySide6.QtWidgets import (
-    QAbstractItemView,
-    QHBoxLayout,
-    QLabel,
-    QLineEdit,
-    QPushButton,
-    QTableView,
-    QVBoxLayout,
-    QWidget,
-)
+from PySide6.QtWidgets import (QAbstractItemView, QHBoxLayout, QLabel,
+                               QLineEdit, QPushButton, QTableView, QVBoxLayout)
 
 from common.gui.core.table_model_default import TableModelDefault
+from common.gui.widget.base_widget import BaseWidget
 from settings import FAV_ICON_FILE_NAME
 
 
-class BaseListWidget(QWidget):
+class BaseListWidget(BaseWidget):
     def __init__(
         self,
         title: str,
