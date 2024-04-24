@@ -1,4 +1,5 @@
 from typing import Any, List, Union
+
 from PySide6.QtCore import QAbstractTableModel, QModelIndex, QPersistentModelIndex, Qt
 
 
@@ -38,7 +39,7 @@ class TableModelDefault(QAbstractTableModel):
         return True
 
     def setData(self, data: List[List[Any]]) -> bool:
-        if len(data[0]) == len(self._headers):
+        if len(data) > 0 and len(data[0]) == len(self._headers):
             self.beginResetModel()
             self._data = data
             self.endResetModel()
