@@ -35,7 +35,7 @@ jobs:
       - name: Build Executable
         run: |
           $env:PYTHONPATH = "${{ github.workspace }}/src;C:\hostedtoolcache\windows\Python\3.12.3\x64\Lib\site-packages"
-          pyinstaller --onefile --windowed --paths $env:PYTHONPATH src/main.py
+          pyinstaller --onefile --windowed --icon="src/img/fav.ico" --paths $env:PYTHONPATH src/main.py
 
       - name: Upload Executable
         uses: actions/upload-artifact@v2
