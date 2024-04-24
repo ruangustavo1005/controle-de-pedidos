@@ -60,17 +60,17 @@ class BaseListWidget(BaseWidget):
         layout = QHBoxLayout()
         layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
 
-        self.add_page_button = QPushButton("Adicionar")
-        self.add_page_button.setFixedWidth(100)
-        layout.addWidget(self.add_page_button)
+        self.add_button = QPushButton("Adicionar")
+        self.add_button.setFixedWidth(100)
+        layout.addWidget(self.add_button)
 
-        self.change_page_button = QPushButton("Alterar")
-        self.change_page_button.setFixedWidth(100)
-        layout.addWidget(self.change_page_button)
+        self.change_button = QPushButton("Alterar")
+        self.change_button.setFixedWidth(100)
+        layout.addWidget(self.change_button)
 
-        self.remove_page_button = QPushButton("Remover")
-        self.remove_page_button.setFixedWidth(100)
-        layout.addWidget(self.remove_page_button)
+        self.remove_button = QPushButton("Remover")
+        self.remove_button.setFixedWidth(100)
+        layout.addWidget(self.remove_button)
 
         return layout
 
