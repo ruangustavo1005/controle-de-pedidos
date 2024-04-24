@@ -1,7 +1,8 @@
 from abc import abstractmethod
+
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QWidget
 from PySide6.QtGui import QIcon
+from PySide6.QtWidgets import QWidget
 
 from settings import FAV_ICON_FILE_NAME
 

@@ -14,7 +14,6 @@ from PySide6.QtWidgets import (
 
 from common.gui.core.table_model_default import TableModelDefault
 from common.gui.widget.base_widget import BaseWidget
-from settings import FAV_ICON_FILE_NAME
 
 
 class BaseListWidget(BaseWidget):
@@ -32,7 +31,7 @@ class BaseListWidget(BaseWidget):
 
     def _init_ui(self) -> None:
         self.base_layout = QVBoxLayout()
-        
+
         self.filter_area_layout = self._create_filter_area()
         self.base_layout.addLayout(self.filter_area_layout)
 
@@ -44,7 +43,7 @@ class BaseListWidget(BaseWidget):
 
         self.pagination_area_layout = self._create_pagination_area()
         self.base_layout.addLayout(self.pagination_area_layout)
-        
+
         self.setLayout(self.base_layout)
 
     def _create_filter_area(self) -> QHBoxLayout:

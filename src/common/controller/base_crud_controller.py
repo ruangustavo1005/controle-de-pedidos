@@ -1,4 +1,5 @@
 from abc import abstractmethod
+
 from common.controller.base_controller import BaseController
 from common.gui.widget.base_crud_widget import BaseCRUDWidget
 
