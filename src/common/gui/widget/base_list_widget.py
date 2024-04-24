@@ -125,10 +125,16 @@ class BaseListWidget(BaseWidget):
         self.last_page_button.setFixedWidth(30)
         layout.addWidget(self.last_page_button)
 
+        self.row_count_label = QLabel()
+        layout.addWidget(self.row_count_label)
+
         return layout
 
     def set_page_count(self, page_count: int) -> None:
         self.last_page_field.setText(str(page_count))
+
+    def set_row_count(self, row_count: int) -> None:
+        self.row_count_label.setText(f"Total de registros: {row_count}")
 
     def _get_table_model_instance(self) -> TableModelDefault:
         return TableModelDefault(self.headers)

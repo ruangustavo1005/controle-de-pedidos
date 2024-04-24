@@ -62,12 +62,17 @@ class BaseListController(BaseController):
         self._widget.show()
 
     def update_table_data(self) -> None:
+        self._update_row_count()
         self._update_page_count()
         data = self._repository.list(
             page=int(self._widget.page_field.text()), limit=self._rows_per_page
         )
         self._widget.table_model.setData(data)
 
+    def _update_row_count(self) -> None:
+        self._row_count = self._repository.count()
+        self._widget.set_row_count(self._row_count)
+
     def _update_page_count(self) -> None:
-        self._page_count = math.ceil(self._repository.count() / self._rows_per_page)
+        self._page_count = math.ceil(self._row_count / self._rows_per_page)
         self._widget.set_page_count(self._page_count)
