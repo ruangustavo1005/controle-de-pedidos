@@ -10,7 +10,7 @@ class CidadeListController(BaseListController):
     def __init__(self, rows_per_page: int = 20) -> None:
         super().__init__(rows_per_page)
 
-    def _get_list_widget_instance(self) -> CidadeListWidget:
+    def _get_widget_instance(self) -> CidadeListWidget:
         return CidadeListWidget()
 
     def _get_repository_instance(self) -> CidadeRepository:

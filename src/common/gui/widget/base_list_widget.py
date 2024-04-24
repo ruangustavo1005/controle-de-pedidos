@@ -1,7 +1,7 @@
 from typing import List
 
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QIcon, QIntValidator
+from PySide6.QtGui import QIntValidator
 from PySide6.QtWidgets import (
     QAbstractItemView,
     QHBoxLayout,
@@ -27,16 +27,12 @@ class BaseListWidget(BaseWidget):
         parent=None,
         flags=Qt.WindowFlags(),
     ):
-        super(BaseListWidget, self).__init__(parent, flags)
-        self.setWindowTitle(title)
-        self.setWindowIcon(QIcon(FAV_ICON_FILE_NAME))
         self.headers = headers
-        self.resize(width, height)
-        self.base_layout = QVBoxLayout()
-        self._init_ui()
-        self.setLayout(self.base_layout)
+        super(BaseListWidget, self).__init__(title, width, height, parent, flags)
 
     def _init_ui(self) -> None:
+        self.base_layout = QVBoxLayout()
+        
         self.filter_area_layout = self._create_filter_area()
         self.base_layout.addLayout(self.filter_area_layout)
 
@@ -48,6 +44,8 @@ class BaseListWidget(BaseWidget):
 
         self.pagination_area_layout = self._create_pagination_area()
         self.base_layout.addLayout(self.pagination_area_layout)
+        
+        self.setLayout(self.base_layout)
 
     def _create_filter_area(self) -> QHBoxLayout:
         layout = QHBoxLayout()

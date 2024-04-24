@@ -1,27 +1,20 @@
 import math
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 
+from common.controller.base_controller import BaseController
 from common.gui.widget.base_list_widget import BaseListWidget
-from common.repository.base_repository import BaseRepository
 
 
-class BaseListController(ABC):
+class BaseListController(BaseController):
     _widget: BaseListWidget
-    _repository: BaseRepository
 
     def __init__(self, rows_per_page: int = 20) -> None:
-        super().__init__()
         self._rows_per_page = rows_per_page
-        self._widget = self._get_list_widget_instance()
-        self._repository = self._get_repository_instance()
+        super().__init__()
         self._set_widget_connections()
 
     @abstractmethod
-    def _get_list_widget_instance(self) -> BaseListWidget:
-        raise NotImplementedError()
-
-    @abstractmethod
-    def _get_repository_instance(self) -> BaseRepository:
+    def _get_widget_instance(self) -> BaseListWidget:
         raise NotImplementedError()
 
     def _set_widget_connections(self) -> None:
