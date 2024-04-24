@@ -1,9 +1,8 @@
 from abc import abstractmethod
-from typing import Optional
 
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QWidget, QMessageBox
+from PySide6.QtWidgets import QMessageBox, QWidget
 
 from settings import FAV_ICON_FILE_NAME
 
@@ -28,22 +27,22 @@ class BaseWidget(QWidget):
         raise NotImplementedError()
 
     def show_info_pop_up(
-        cls, title: str, text: str, info_text: Optional[str] = None
+        cls, title: str, text: str, info_text: str | None = None
     ) -> QMessageBox.StandardButton:
         cls.show_pop_up(title, text, QMessageBox.Icon.Information, info_text)
 
     def show_warning_pop_up(
-        cls, title: str, text: str, info_text: Optional[str] = None
+        cls, title: str, text: str, info_text: str | None = None
     ) -> QMessageBox.StandardButton:
         cls.show_pop_up(title, text, QMessageBox.Icon.Warning, info_text)
 
     def show_error_pop_up(
-        cls, title: str, text: str, info_text: Optional[str] = None
+        cls, title: str, text: str, info_text: str | None = None
     ) -> QMessageBox.StandardButton:
         cls.show_pop_up(title, text, QMessageBox.Icon.Critical, info_text)
 
     def show_question_pop_up(
-        cls, title: str, text: str, info_text: Optional[str] = None
+        cls, title: str, text: str, info_text: str | None = None
     ) -> QMessageBox.StandardButton:
         cls.show_pop_up(title, text, QMessageBox.Icon.Question, info_text)
 
@@ -53,12 +52,13 @@ class BaseWidget(QWidget):
         title: str,
         text: str,
         icon: QMessageBox.Icon,
-        info_text: Optional[str] = None,
+        info_text: str | None = None,
     ) -> QMessageBox.StandardButton:
         pop_up = QMessageBox()
         pop_up.setWindowTitle(title)
         pop_up.setText(text)
         pop_up.setIcon(icon)
+        pop_up.setWindowIcon(QIcon(FAV_ICON_FILE_NAME))
         if info_text:
             pop_up.setInformativeText(info_text)
 

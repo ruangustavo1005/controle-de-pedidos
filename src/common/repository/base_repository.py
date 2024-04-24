@@ -1,6 +1,6 @@
 import sqlite3
 from abc import ABC, abstractmethod
-from typing import Any, List
+from typing import Any, Dict, List
 
 from common.repository.connection import Connection
 
@@ -46,6 +46,22 @@ class BaseRepository(ABC):
 
         cursor.close()
         return count
+
+    def add(self, data: Dict[str, Any]) -> bool:
+        columns = ", ".join(data.keys())
+        placeholders = ", ".join(["?" for _ in data.values()])
+        values = tuple(data.values())
+
+        sql = f"INSERT INTO {self._table_name} ({columns}) VALUES ({placeholders})"
+        try:
+            cursor = self._get_connection().cursor()
+            cursor.execute(sql, values)
+            self._get_connection().commit()
+            cursor.close()
+            return True
+        except sqlite3.Error as e:
+            print(f"Erro ao inserir dados: {e}")
+            return False
 
     def _get_connection(self) -> sqlite3.Connection:
         return Connection.get_connection()

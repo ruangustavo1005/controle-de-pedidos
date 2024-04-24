@@ -8,9 +8,11 @@ from common.gui.widget.base_list_widget import BaseListWidget
 class BaseListController(BaseController):
     _widget: BaseListWidget
 
-    def __init__(self, rows_per_page: int = 20) -> None:
+    def __init__(
+        self, rows_per_page: int = 20, caller: BaseController | None = None
+    ) -> None:
         self._rows_per_page = rows_per_page
-        super().__init__()
+        super().__init__(caller)
         self._set_widget_connections()
 
     @abstractmethod
@@ -59,7 +61,7 @@ class BaseListController(BaseController):
 
     def show(self) -> None:
         self.update_table_data()
-        self._widget.show()
+        super().show()
 
     def update_table_data(self) -> None:
         self._update_row_count()
