@@ -32,13 +32,17 @@ jobs:
       - name: Build Executable
         run: |
           $env:PYTHONPATH = "${{ github.workspace }}/src;C:\hostedtoolcache\windows\Python\3.12.3\x64\Lib\site-packages"
-          pyinstaller --onefile --windowed --icon="src/img/fav.ico" --paths $env:PYTHONPATH src/main.py
+          pyinstaller --windowed --icon="src/img/fav.ico" --paths $env:PYTHONPATH src/main.py
+
+      - name: Zip the build
+        run: |
+          Compress-Archive -Path dist/* -DestinationPath dist/build.zip
 
       - name: Upload Executable
         uses: actions/upload-artifact@v2
         with:
-          name: windows-executable
-          path: dist/main.exe
+          name: controle-de-pedidos.zip
+          path: dist/build.zip
 
       - name: Create Release
         id: create_release
