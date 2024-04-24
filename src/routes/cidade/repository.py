@@ -1,4 +1,5 @@
 from typing import Any, List
+
 from common.repository.base_repository import BaseRepository
 
 
@@ -16,6 +17,7 @@ class CidadeRepository(BaseRepository):
     ) -> List[List[Any]]:
         columns = ", ".join(
             [
+                "id",
                 "nome",
                 f"(SELECT COUNT(1) FROM cliente WHERE cliente.cidade_id = {self._table_name}.id) as qtd_clientes",
             ]

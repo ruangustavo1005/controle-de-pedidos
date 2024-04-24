@@ -1,5 +1,5 @@
-from abc import ABC, abstractmethod
 import math
+from abc import ABC, abstractmethod
 
 from common.gui.widget.base_list_widget import BaseListWidget
 from common.repository.base_repository import BaseRepository
@@ -8,7 +8,7 @@ from common.repository.base_repository import BaseRepository
 class BaseListController(ABC):
     _widget: BaseListWidget
     _repository: BaseRepository
-    
+
     def __init__(self, rows_per_page: int = 20) -> None:
         super().__init__()
         self._rows_per_page = rows_per_page
@@ -28,7 +28,9 @@ class BaseListController(ABC):
         self._widget.update_button.clicked.connect(self._update_button_clicked)
         self._widget.page_field.returnPressed.connect(self._page_field_return_pressed)
         self._widget.first_page_button.clicked.connect(self._first_page_button_clicked)
-        self._widget.before_page_button.clicked.connect(self._before_page_button_clicked)
+        self._widget.before_page_button.clicked.connect(
+            self._before_page_button_clicked
+        )
         self._widget.after_page_button.clicked.connect(self._after_page_button_clicked)
         self._widget.last_page_button.clicked.connect(self._last_page_button_clicked)
 
@@ -68,7 +70,9 @@ class BaseListController(ABC):
 
     def update_table_data(self) -> None:
         self._update_page_count()
-        data = self._repository.list(page=int(self._widget.page_field.text()), limit=self._rows_per_page)
+        data = self._repository.list(
+            page=int(self._widget.page_field.text()), limit=self._rows_per_page
+        )
         self._widget.table_model.setData(data)
 
     def _update_page_count(self) -> None:
