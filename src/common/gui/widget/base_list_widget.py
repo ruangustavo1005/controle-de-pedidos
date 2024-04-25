@@ -60,19 +60,29 @@ class BaseListWidget(BaseWidget):
         layout = QHBoxLayout()
         layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
 
-        self.add_page_button = QPushButton("Adicionar")
-        self.add_page_button.setFixedWidth(100)
-        layout.addWidget(self.add_page_button)
+        self.add_button = QPushButton("Adicionar")
+        self.add_button.setFixedWidth(100)
+        layout.addWidget(self.add_button)
 
-        self.change_page_button = QPushButton("Alterar")
-        self.change_page_button.setFixedWidth(100)
-        layout.addWidget(self.change_page_button)
+        self.change_button = QPushButton("Alterar")
+        self.change_button.setFixedWidth(100)
+        layout.addWidget(self.change_button)
 
-        self.remove_page_button = QPushButton("Remover")
-        self.remove_page_button.setFixedWidth(100)
-        layout.addWidget(self.remove_page_button)
+        self.remove_button = QPushButton("Remover")
+        self.remove_button.setFixedWidth(100)
+        layout.addWidget(self.remove_button)
+
+        self.disable_row_actions()
 
         return layout
+
+    def enable_row_actions(self) -> None:
+        self.change_button.setDisabled(False)
+        self.remove_button.setDisabled(False)
+
+    def disable_row_actions(self) -> None:
+        self.change_button.setDisabled(True)
+        self.remove_button.setDisabled(True)
 
     def _create_table_area(self) -> QHBoxLayout:
         layout = QHBoxLayout()
@@ -125,10 +135,18 @@ class BaseListWidget(BaseWidget):
         self.last_page_button.setFixedWidth(30)
         layout.addWidget(self.last_page_button)
 
+        self.row_count_label = QLabel()
+        layout.addWidget(self.row_count_label)
+
         return layout
 
     def set_page_count(self, page_count: int) -> None:
         self.last_page_field.setText(str(page_count))
+
+    def set_row_count(self, row_count: int, rows_per_page: int) -> None:
+        self.row_count_label.setText(
+            f"Total de registros: <b>{row_count}</b> ({rows_per_page} por página)"
+        )
 
     def _get_table_model_instance(self) -> TableModelDefault:
         return TableModelDefault(self.headers)
