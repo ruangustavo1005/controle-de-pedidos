@@ -144,7 +144,9 @@ class BaseListWidget(BaseWidget):
         self.last_page_field.setText(str(page_count))
 
     def set_row_count(self, row_count: int, rows_per_page: int) -> None:
-        self.row_count_label.setText(f"Total de registros: <b>{row_count}</b> ({rows_per_page} por página)")
+        self.row_count_label.setText(
+            f"Total de registros: <b>{row_count}</b> ({rows_per_page} por página)"
+        )
 
     def _get_table_model_instance(self) -> TableModelDefault:
         return TableModelDefault(self.headers)

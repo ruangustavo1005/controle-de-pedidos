@@ -37,7 +37,7 @@ class BaseRepository(ABC):
 
     def find(self, id: int, columns: str = "*") -> Dict | None:
         sql = f"SELECT {columns} FROM {self._table_name} WHERE id = ?"
-        
+
         cursor = self._get_connection().cursor()
         cursor.execute(sql, (id,))
         result = cursor.fetchone()
@@ -76,12 +76,12 @@ class BaseRepository(ABC):
             return False
 
     def change(self, id: int, data: Dict[str, Any]) -> bool:
-        updates = ', '.join([f"{key} = ?" for key in data.keys()])
+        updates = ", ".join([f"{key} = ?" for key in data.keys()])
         values = list(data.values())
         values.append(id)
 
         sql = f"UPDATE {self._table_name} SET {updates} WHERE id = ?"
-        
+
         try:
             cursor = self._get_connection().cursor()
             cursor.execute(sql, tuple(values))
@@ -91,7 +91,6 @@ class BaseRepository(ABC):
         except sqlite3.Error as e:
             print(f"Erro ao atualizar dados: {e}")
             return False
-
 
     def _get_connection(self) -> sqlite3.Connection:
         return Connection.get_connection()

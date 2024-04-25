@@ -16,13 +16,9 @@ class CidadeAddController(BaseCRUDController):
     def execute_action(self) -> None:
         nome = self._widget.nome_field.text()
         if not nome:
-            self._widget.show_info_pop_up(
-                "Atenção", "O nome da cidade é obrigatório"
-            )
+            self._widget.show_info_pop_up("Atenção", "O nome da cidade é obrigatório")
         elif self._repository.add({"nome": nome}):
-            self._widget.show_info_pop_up(
-                "Sucesso", "Cidade criada com sucesso"
-            )
+            self._widget.show_info_pop_up("Sucesso", "Cidade criada com sucesso")
             self._caller.update_table_data()
             self._widget.close()
         else:
