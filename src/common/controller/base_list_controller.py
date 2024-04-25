@@ -37,7 +37,6 @@ class BaseListController(BaseController):
 
     def _update_button_clicked(self) -> None:
         self._widget.page_field.setText("1")
-        self._on_table_selection_changed(QItemSelection(), QItemSelection())
         self.update_table_data()
 
     def _on_table_selection_changed(
@@ -82,6 +81,7 @@ class BaseListController(BaseController):
         super().show()
 
     def update_table_data(self) -> None:
+        self._on_table_selection_changed(QItemSelection(), QItemSelection())
         self._update_row_count()
         self._update_page_count()
         data = self._repository.list(

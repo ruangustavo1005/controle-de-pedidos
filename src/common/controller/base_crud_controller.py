@@ -9,7 +9,7 @@ class BaseCRUDController(BaseController):
     _widget: BaseCRUDWidget
     _caller: BaseListController
 
-    def __init__(self, caller: BaseController | None = None) -> None:
+    def __init__(self, caller: BaseListController | None = None) -> None:
         super().__init__(caller)
         self._widget.submit_button.clicked.connect(self.execute_action)
 
