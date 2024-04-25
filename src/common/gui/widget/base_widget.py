@@ -26,25 +26,29 @@ class BaseWidget(QWidget):
     def _init_ui(self) -> None:
         raise NotImplementedError()
 
+    @classmethod
     def show_info_pop_up(
         cls, title: str, text: str, info_text: str | None = None
     ) -> QMessageBox.StandardButton:
-        cls.show_pop_up(title, text, QMessageBox.Icon.Information, info_text)
+        return cls.show_pop_up(title, text, QMessageBox.Icon.Information, info_text)
 
+    @classmethod
     def show_warning_pop_up(
         cls, title: str, text: str, info_text: str | None = None
     ) -> QMessageBox.StandardButton:
-        cls.show_pop_up(title, text, QMessageBox.Icon.Warning, info_text)
+        return cls.show_pop_up(title, text, QMessageBox.Icon.Warning, info_text)
 
+    @classmethod
     def show_error_pop_up(
         cls, title: str, text: str, info_text: str | None = None
     ) -> QMessageBox.StandardButton:
-        cls.show_pop_up(title, text, QMessageBox.Icon.Critical, info_text)
+        return cls.show_pop_up(title, text, QMessageBox.Icon.Critical, info_text)
 
+    @classmethod
     def show_question_pop_up(
         cls, title: str, text: str, info_text: str | None = None
     ) -> QMessageBox.StandardButton:
-        cls.show_pop_up(title, text, QMessageBox.Icon.Question, info_text)
+        return cls.show_pop_up(title, text, QMessageBox.Icon.Question, info_text)
 
     @classmethod
     def show_pop_up(

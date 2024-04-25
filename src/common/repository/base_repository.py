@@ -92,6 +92,19 @@ class BaseRepository(ABC):
             print(f"Erro ao atualizar dados: {e}")
             return False
 
+    def remove(self, id: int) -> bool:
+        sql = f"DELETE FROM {self._table_name} WHERE id = ?"
+
+        try:
+            cursor = self._get_connection().cursor()
+            cursor.execute(sql, (id,))
+            self._get_connection().commit()
+            cursor.close()
+            return True
+        except sqlite3.Error as e:
+            print(f"Erro ao remover dados: {e}")
+            return False
+
     def _get_connection(self) -> sqlite3.Connection:
         return Connection.get_connection()
 

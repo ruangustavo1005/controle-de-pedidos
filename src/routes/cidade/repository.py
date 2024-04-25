@@ -1,3 +1,4 @@
+import sqlite3
 from typing import Any, List
 
 from common.repository.base_repository import BaseRepository
@@ -24,3 +25,15 @@ class CidadeRepository(BaseRepository):
         )
         order = "LOWER(nome) ASC"
         return super().list(page, limit, columns, order, filter)
+
+    def count_clientes(self, id: int) -> int:
+        sql = f"SELECT COUNT(1) AS count FROM cliente WHERE cidade_id = ?"
+
+        cursor = self._get_connection().cursor()
+        cursor.execute(sql, (id,))
+        results: sqlite3.Row = cursor.fetchone()
+
+        count = results["count"]
+
+        cursor.close()
+        return count

@@ -1,4 +1,3 @@
-from common.controller.base_controller import BaseController
 from common.controller.base_change_controller import BaseChangeController
 from routes.cidade.change.widget import CidadeChangeWidget
 from routes.cidade.repository import CidadeRepository
