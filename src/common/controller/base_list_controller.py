@@ -94,5 +94,5 @@ class BaseListController(BaseController):
         self._widget.set_row_count(self._row_count, self._rows_per_page)
 
     def _update_page_count(self) -> None:
-        self._page_count = math.ceil(self._row_count / self._rows_per_page)
+        self._page_count = max(math.ceil(self._row_count / self._rows_per_page), 1)
         self._widget.set_page_count(self._page_count)
