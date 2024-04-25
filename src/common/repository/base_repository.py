@@ -35,6 +35,18 @@ class BaseRepository(ABC):
         cursor.close()
         return items
 
+    def find(self, id: int, columns: str = "*") -> Dict | None:
+        sql = f"SELECT {columns} FROM {self._table_name} WHERE id = ?"
+        
+        cursor = self._get_connection().cursor()
+        cursor.execute(sql, (id,))
+        result = cursor.fetchone()
+
+        dict_result = dict(result) if result is not None else None
+
+        cursor.close()
+        return dict_result
+
     def count(self) -> int:
         sql = f"SELECT COUNT(1) AS count FROM {self._table_name}"
 
@@ -62,6 +74,24 @@ class BaseRepository(ABC):
         except sqlite3.Error as e:
             print(f"Erro ao inserir dados: {e}")
             return False
+
+    def change(self, id: int, data: Dict[str, Any]) -> bool:
+        updates = ', '.join([f"{key} = ?" for key in data.keys()])
+        values = list(data.values())
+        values.append(id)
+
+        sql = f"UPDATE {self._table_name} SET {updates} WHERE id = ?"
+        
+        try:
+            cursor = self._get_connection().cursor()
+            cursor.execute(sql, tuple(values))
+            self._get_connection().commit()
+            cursor.close()
+            return True
+        except sqlite3.Error as e:
+            print(f"Erro ao atualizar dados: {e}")
+            return False
+
 
     def _get_connection(self) -> sqlite3.Connection:
         return Connection.get_connection()
