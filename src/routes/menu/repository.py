@@ -1,5 +1,6 @@
 import sqlite3
 from typing import Any, List
+
 from common.repository.base_repository import BaseRepository
 from routes.pedido.enum import PedidoStatusEnum
 
@@ -8,11 +9,7 @@ class MenuRepository(BaseRepository):
     def _get_table_name(self) -> str:
         return "pedido_produto"
 
-    def list(
-        self,
-        page: int,
-        limit: int = 20
-    ) -> List[List[Any]]:
+    def list(self, page: int, limit: int = 20) -> List[List[Any]]:
         offset = (page - 1) * limit
 
         sql = """

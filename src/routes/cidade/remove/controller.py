@@ -1,7 +1,8 @@
+from PySide6.QtWidgets import QMessageBox
+
 from common.controller.base_remove_controller import BaseRemoveController
 from common.gui.widget.base_widget import BaseWidget
 from routes.cidade.repository import CidadeRepository
-from PySide6.QtWidgets import QMessageBox
 
 
 class CidadeRemoveController(BaseRemoveController):

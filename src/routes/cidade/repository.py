@@ -27,7 +27,7 @@ class CidadeRepository(BaseRepository):
         return super().list(page, limit, columns, order, filter)
 
     def count_clientes(self, id: int) -> int:
-        sql = f"SELECT COUNT(1) AS count FROM cliente WHERE cidade_id = ?"
+        sql = "SELECT COUNT(1) AS count FROM cliente WHERE cidade_id = ?"
 
         cursor = self._get_connection().cursor()
         cursor.execute(sql, (id,))

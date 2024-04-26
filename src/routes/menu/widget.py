@@ -1,7 +1,8 @@
-from PySide6.QtCore import Qt
 from typing import Any, List
-from PySide6.QtWidgets import QMenuBar
-from PySide6.QtGui import QAction, QIcon
+
+from PySide6.QtCore import Qt
+from PySide6.QtGui import QAction, QCloseEvent, QIcon
+from PySide6.QtWidgets import QApplication, QMenuBar
 
 from common.gui.widget.base_list_widget import BaseListWidget
 from settings import FAV_ICON_FILE_NAME
@@ -21,6 +22,9 @@ class MenuWidget(BaseListWidget):
         self.table.hideColumn(0)
         self.table.setColumnWidth(1, 150)
         self.table.setColumnWidth(2, 75)
+
+    def closeEvent(self, event: QCloseEvent) -> None:
+        QApplication.quit()
 
     def _init_ui(self) -> None:
         super()._init_ui()

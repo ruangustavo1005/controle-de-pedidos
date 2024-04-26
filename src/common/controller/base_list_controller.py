@@ -13,7 +13,7 @@ class BaseListController(BaseController):
     _selected_data: List[Any] | None = None
 
     def __init__(
-        self, rows_per_page: int = 20, caller: BaseController | None = None
+        self, rows_per_page: int, caller: BaseController | None = None
     ) -> None:
         self._rows_per_page = rows_per_page
         super().__init__(caller)

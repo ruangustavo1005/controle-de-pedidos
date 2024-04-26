@@ -11,6 +11,9 @@ class CidadeListController(BaseListController):
     _widget: CidadeListWidget
     _repository: CidadeRepository
 
+    def __init__(self, caller: BaseController | None = None) -> None:
+        super().__init__(rows_per_page=20, caller=caller)
+
     def _get_widget_instance(self) -> CidadeListWidget:
         return CidadeListWidget()
 
