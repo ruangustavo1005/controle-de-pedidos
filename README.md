@@ -11,7 +11,7 @@ gerenciador de pedidos que controla quantidade de produtos a serem produzidos
   - [ ] para o cadastro de cliente, deve ter obrigatoriamente o nome e a cidade, e opcionalmente o telefone
   - [ ] pode ser alterado ou excluído (caso não tenha pedidos relacionados)
   - [ ] a listagem deve conter o nome, telefone (com link para o whatsapp), cidade e quantidade de pedidos relacionas àquele cliente
-  - [ ] a listagem deve permitir filtrar por nome, cidade e telefone
+  - [ ] a listagem deve permitir filtrar por nome e cidade
 - [ ] listagem e manutenção de produtos
   - [ ] para o cadastro dos produtos, deve ter obrigatóriamente o nome, preço e unidade de medida (kg ou lata)
   - [ ] pode ser alterado ou excluído (caso não tenha pedidos relacionados)
