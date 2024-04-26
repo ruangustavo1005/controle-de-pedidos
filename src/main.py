@@ -3,13 +3,13 @@ import sys
 from PySide6.QtWidgets import QApplication
 
 import database
-from routes.cidade.list.controller import CidadeListController
+from routes.menu.controller import MenuController
 
 database.create_if_not_exists()
 
 app = QApplication(sys.argv)
 
-controller = CidadeListController()
-controller.show()
+menu_controller = MenuController()
+menu_controller.show()
 
 sys.exit(app.exec())
