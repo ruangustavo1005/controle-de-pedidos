@@ -2,11 +2,11 @@
 gerenciador de pedidos que controla quantidade de produtos a serem produzidos
 
 ## features:
-- [ ] listagem e manutenção de cidade
+- [x] listagem e manutenção de cidade
   - [x] para o cadastro da cidade, basta o nome
   - [x] pode ser alterado ou excluído (caso não tenha clientes relacionados)
   - [x] a listagem deve conter nome e quantidade de clientes cadastrados para aquela cidades
-  - [ ] a listagem deve permitir filtrar por nome
+  - [x] a listagem deve permitir filtrar por nome
 - [ ] listagem e manutenção de clientes
   - [ ] para o cadastro de cliente, deve ter obrigatoriamente o nome e a cidade, e opcionalmente o telefone
   - [ ] pode ser alterado ou excluído (caso não tenha pedidos relacionados)

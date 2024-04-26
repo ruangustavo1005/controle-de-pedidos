@@ -9,7 +9,14 @@ class MenuRepository(BaseRepository):
     def _get_table_name(self) -> str:
         return "pedido_produto"
 
-    def list(self, page: int, limit: int = 20) -> List[List[Any]]:
+    def list(
+        self,
+        page: int,
+        limit: int = 20,
+        columns: str = "*",
+        order: str = "1 ASC",
+        filter: str = "1 = 1",
+    ) -> List[List[Any]]:
         offset = (page - 1) * limit
 
         sql = """
@@ -37,7 +44,7 @@ OFFSET ?;
         cursor.close()
         return items
 
-    def count(self) -> int:
+    def count(self, filter: str = "1 = 1") -> int:
         sql = """
 WITH origin AS (
     SELECT produto.id AS produto_id

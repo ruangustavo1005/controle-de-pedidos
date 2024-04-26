@@ -47,8 +47,8 @@ class BaseRepository(ABC):
         cursor.close()
         return dict_result
 
-    def count(self) -> int:
-        sql = f"SELECT COUNT(1) AS count FROM {self._table_name}"
+    def count(self, filter: str = "1 = 1") -> int:
+        sql = f"SELECT COUNT(1) AS count FROM {self._table_name} WHERE {filter}"
 
         cursor = self._get_connection().cursor()
         cursor.execute(sql)

@@ -84,13 +84,21 @@ class BaseListController(BaseController):
         self._on_table_selection_changed(QItemSelection(), QItemSelection())
         self._update_row_count()
         self._update_page_count()
-        data = self._repository.list(
-            page=int(self._widget.page_field.text()), limit=self._rows_per_page
-        )
+        data = self._list()
         self._widget.table_model.setData(data)
 
+    def _list(self) -> List[List[Any]]:
+        return self._repository.list(
+            page=int(self._widget.page_field.text()),
+            limit=self._rows_per_page,
+            filter=self._build_list_filter(),
+        )
+
+    def _build_list_filter(self) -> str:
+        return "1 = 1"
+
     def _update_row_count(self) -> None:
-        self._row_count = self._repository.count()
+        self._row_count = self._repository.count(filter=self._build_list_filter())
         self._widget.set_row_count(self._row_count, self._rows_per_page)
 
     def _update_page_count(self) -> None:
