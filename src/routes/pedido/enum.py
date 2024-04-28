@@ -1,7 +1,7 @@
-from enum import Enum
+from common.enum import BaseEnum
 
 
-class PedidoStatusEnum(str, Enum):
-    EM_PRODUCAO = "em_producao"
-    FEITO = "feito"
-    ENTREGUE = "entregue"
+class PedidoStatusEnum(BaseEnum):
+    EM_PRODUCAO = ("em_producao", "Em produção")
+    FEITO = ("feito", "Feito")
+    ENTREGUE = ("entregue", "Entregue")
