@@ -1,6 +1,7 @@
 from common.controller.base_controller import BaseController
 from common.controller.base_list_controller import BaseListController
 from routes.cidade.list.controller import CidadeListController
+from routes.cliente.list.controller import ClienteListController
 from routes.menu.repository import MenuRepository
 from routes.menu.widget import MenuWidget
 
@@ -17,10 +18,17 @@ class MenuController(BaseListController):
         self._widget.cidade_menu_item.triggered.connect(
             self.__cidade_menu_item_triggered
         )
+        self._widget.cliente_menu_item.triggered.connect(
+            self.__cliente_menu_item_triggered
+        )
 
     def __cidade_menu_item_triggered(self) -> None:
         self.cidade_list_controller = CidadeListController(self)
         self.cidade_list_controller.show()
+
+    def __cliente_menu_item_triggered(self) -> None:
+        self.cliente_list_controller = ClienteListController(self)
+        self.cliente_list_controller.show()
 
     def _get_widget_instance(self) -> MenuWidget:
         return MenuWidget()

@@ -1,4 +1,3 @@
-from typing import Any, List
 from common.controller.base_controller import BaseController
 from common.controller.base_list_controller import BaseListController
 from routes.cidade.add.controller import CidadeAddController
@@ -24,7 +23,7 @@ class CidadeListController(BaseListController):
     def _build_list_filter(self) -> str:
         nome_filter = self._widget.nome_filter.text()
         if nome_filter:
-            return f"UPPER(nome) LIKE UPPER(\"%{nome_filter}%\")"
+            return f'UPPER(nome) LIKE UPPER("%{nome_filter}%")'
         return super()._build_list_filter()
 
     def _set_widget_connections(self) -> None:

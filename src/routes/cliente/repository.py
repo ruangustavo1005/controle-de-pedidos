@@ -1,12 +1,12 @@
 import sqlite3
-from typing import Any, Dict, List
+from typing import Any, List
 
 from common.repository.base_repository import BaseRepository
 
 
-class CidadeRepository(BaseRepository):
+class ClienteRepository(BaseRepository):
     def _get_table_name(self) -> str:
-        return "cidade"
+        return "cliente"
 
     def list(
         self,
@@ -20,14 +20,16 @@ class CidadeRepository(BaseRepository):
             [
                 "id",
                 "nome",
-                f"(SELECT COUNT(1) FROM cliente WHERE cliente.cidade_id = {self._table_name}.id) as qtd_clientes",
+                "telefone",
+                f"(SELECT cidade.nome FROM cidade WHERE cidade.id = {self._table_name}.cidade_id) as nome_cidade",
+                f"(SELECT COUNT(1) FROM pedido WHERE pedido.cliente_id = {self._table_name}.id) as qtd_pedidos",
             ]
         )
         order = "LOWER(nome) ASC"
         return super().list(page, limit, columns, order, filter)
 
-    def count_clientes(self, id: int) -> int:
-        sql = "SELECT COUNT(1) AS count FROM cliente WHERE cidade_id = ?"
+    def count_pedidos(self, id: int) -> int:
+        sql = "SELECT COUNT(1) AS count FROM pedido WHERE cliente_id = ?"
 
         cursor = self._get_connection().cursor()
         cursor.execute(sql, (id,))
@@ -37,13 +39,3 @@ class CidadeRepository(BaseRepository):
 
         cursor.close()
         return count
-
-    def list_for_combo_box(self) -> List[Dict[str, Any]]:
-        sql = f"SELECT id, nome FROM {self._table_name} ORDER BY nome"
-
-        cursor = self._get_connection().cursor()
-        cursor.execute(sql)
-        results = cursor.fetchall()
-
-        cursor.close()
-        return results
