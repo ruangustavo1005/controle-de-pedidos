@@ -22,7 +22,7 @@ class CidadeChangeController(BaseChangeController):
         nome = self._widget.nome_field.text()
         if not nome:
             self._widget.show_info_pop_up("Atenção", "O nome da cidade é obrigatório")
-        elif self._repository.change(self._data_id, {"nome": nome}):
+        elif self._repository.change(self._data_id, {"nome": nome.strip()}):
             self._widget.show_info_pop_up("Sucesso", "Cidade alterada com sucesso")
             self._caller.update_table_data()
             self._widget.close()

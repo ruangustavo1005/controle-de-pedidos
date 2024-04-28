@@ -36,6 +36,7 @@ class BaseListWidget(BaseWidget):
         self.base_layout.addLayout(self.filter_area_layout)
 
         self.actions_area_layout = self._create_actions_area()
+        self.disable_row_actions()
         self.base_layout.addLayout(self.actions_area_layout)
 
         self.table_area_layout = self._create_table_area()
@@ -76,8 +77,6 @@ class BaseListWidget(BaseWidget):
         self.remove_button = QPushButton("Remover")
         self.remove_button.setFixedWidth(100)
         layout.addWidget(self.remove_button)
-
-        self.disable_row_actions()
 
         return layout
 
