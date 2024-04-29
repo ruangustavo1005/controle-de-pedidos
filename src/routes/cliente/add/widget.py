@@ -1,5 +1,5 @@
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QFormLayout, QLabel, QLineEdit, QComboBox
+from PySide6.QtWidgets import QComboBox, QFormLayout, QLabel, QLineEdit
 
 from common.gui.widget.base_crud_widget import BaseCRUDWidget
 from routes.cidade.repository import CidadeRepository

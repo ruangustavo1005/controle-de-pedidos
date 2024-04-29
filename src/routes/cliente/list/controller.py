@@ -1,4 +1,8 @@
 import re
+
+from PySide6.QtCore import QUrl
+from PySide6.QtGui import QDesktopServices
+
 from common.controller.base_controller import BaseController
 from common.controller.base_list_controller import BaseListController
 from routes.cliente.add.controller import ClienteAddController
@@ -6,8 +10,6 @@ from routes.cliente.change.controller import ClienteChangeController
 from routes.cliente.list.widget import ClienteListWidget
 from routes.cliente.remove.controller import ClienteRemoveController
 from routes.cliente.repository import ClienteRepository
-from PySide6.QtGui import QDesktopServices
-from PySide6.QtCore import QUrl
 
 
 class ClienteListController(BaseListController):
@@ -56,5 +58,5 @@ class ClienteListController(BaseListController):
         self.remove_controller.execute_action()
 
     def __whatsapp_button_clicked(self) -> None:
-        phone = "".join(re.findall(r'\d+', self._selected_data[2]))
+        phone = "".join(re.findall(r"\d+", self._selected_data[2]))
         QDesktopServices.openUrl(QUrl(f"https://web.whatsapp.com/send?phone={phone}"))

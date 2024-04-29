@@ -15,7 +15,7 @@ class CidadeRemoveController(BaseRemoveController):
         if self._repository.count_clientes(self._data_id) == 0:
             option = BaseWidget.show_question_pop_up(
                 "Atenção",
-                "Deseja remove a Cidade selecionada?",
+                "Deseja remover a Cidade selecionada?",
                 "Essa ação não pode ser desfeita!",
             )
             if option == QMessageBox.StandardButton.Ok:

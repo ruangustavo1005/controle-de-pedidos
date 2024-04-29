@@ -10,7 +10,13 @@ class ProdutoListWidget(BaseListWidget):
     def __init__(
         self,
         title: str = "Produto",
-        headers: List[List[Any]] = ["ID", "Nome", "Preço", "Unidade de Medida", "Qtd. de Vendas"],
+        headers: List[List[Any]] = [
+            "ID",
+            "Nome",
+            "Preço",
+            "Unidade de Medida",
+            "Qtd. de Vendas",
+        ],
         width: int = 800,
         height: int = 738,
         parent=None,

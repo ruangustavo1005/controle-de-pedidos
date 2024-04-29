@@ -1,8 +1,9 @@
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QFormLayout, QLabel, QLineEdit
+from PySide6.QtWidgets import QComboBox, QFormLayout, QLabel, QLineEdit
 
 from common.field.monetary_input import MonetaryInput
 from common.gui.widget.base_crud_widget import BaseCRUDWidget
+from routes.produto.enum import ProdutoUnidadeMedidaEnum
 
 
 class ProdutoAddWidget(BaseCRUDWidget):
@@ -25,4 +26,12 @@ class ProdutoAddWidget(BaseCRUDWidget):
         self.preco_field = MonetaryInput()
         layout.addRow(QLabel("Preço:"), self.preco_field)
 
+        self.unidade_medida_field = QComboBox()
+        self.unidade_medida_field.addItem(
+            ProdutoUnidadeMedidaEnum.PACOTE.value,
+            ProdutoUnidadeMedidaEnum.PACOTE.description,
+        )
+        self.unidade_medida_field.addItem(
+            ProdutoUnidadeMedidaEnum.KG.value, ProdutoUnidadeMedidaEnum.KG.description
+        )
         return layout

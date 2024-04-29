@@ -19,7 +19,9 @@ class ClienteAddController(BaseCRUDController):
         telefone = self._widget.telefone_field.text() or None
         if not nome:
             self._widget.show_info_pop_up("Atenção", "O nome do cliente é obrigatório")
-        elif self._repository.add({"nome": nome.strip(), "cidade_id": cidade, "telefone": telefone.strip()}):
+        elif self._repository.add(
+            {"nome": nome.strip(), "cidade_id": cidade, "telefone": telefone.strip()}
+        ):
             self._widget.show_info_pop_up("Sucesso", "Cliente criado com sucesso")
             self._caller.update_table_data()
             self._widget.close()

@@ -1,9 +1,9 @@
 from common.controller.base_controller import BaseController
 from common.controller.base_list_controller import BaseListController
 from routes.cidade.change.controller import CidadeChangeController
-from routes.cidade.remove.controller import CidadeRemoveController
 from routes.produto.add.controller import ProdutoAddController
 from routes.produto.list.widget import ProdutoListWidget
+from routes.produto.remove.controller import ProdutoRemoveController
 from routes.produto.repository import ProdutoRepository
 
 
@@ -43,6 +43,6 @@ class ProdutoListController(BaseListController):
         self.change_controller.show()
 
     def __remove_button_clicked(self) -> None:
-        cidade_id = int(self._selected_data[0])
-        self.remove_controller = CidadeRemoveController(cidade_id, self)
+        produto_id = int(self._selected_data[0])
+        self.remove_controller = ProdutoRemoveController(produto_id, self)
         self.remove_controller.execute_action()

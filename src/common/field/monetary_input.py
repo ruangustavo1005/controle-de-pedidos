@@ -1,6 +1,6 @@
+from PySide6.QtCore import Qt
 from PySide6.QtGui import QKeyEvent
 from PySide6.QtWidgets import QLineEdit
-from PySide6.QtCore import Qt
 
 
 class MonetaryInput(QLineEdit):
@@ -15,7 +15,7 @@ class MonetaryInput(QLineEdit):
             new_text = self.text().replace(",", "") + event.text()
             new_text = new_text.zfill(2)
             self.setText(f"{int(new_text[:-2] or "0")},{new_text[-2:]}")
-        elif event.key() == Qt.Key_Backspace:
+        elif event.key() == Qt.Key.Key_Backspace:
             new_text = self.text().replace(",", "")
             new_text = new_text[:-1] if len(new_text) > 1 else "0"
             new_text = new_text.zfill(2)
