@@ -11,7 +11,7 @@ class ProdutoAddWidget(BaseCRUDWidget):
         self,
         title: str = "Adicionar Produto",
         width: int = 300,
-        height: int = 200,
+        height: int = 120,
         parent=None,
         flags=Qt.WindowFlags(),
     ):
@@ -28,10 +28,12 @@ class ProdutoAddWidget(BaseCRUDWidget):
 
         self.unidade_medida_field = QComboBox()
         self.unidade_medida_field.addItem(
-            ProdutoUnidadeMedidaEnum.PACOTE.value,
             ProdutoUnidadeMedidaEnum.PACOTE.description,
+            ProdutoUnidadeMedidaEnum.PACOTE.value,
         )
         self.unidade_medida_field.addItem(
-            ProdutoUnidadeMedidaEnum.KG.value, ProdutoUnidadeMedidaEnum.KG.description
+            ProdutoUnidadeMedidaEnum.KG.description, ProdutoUnidadeMedidaEnum.KG.value
         )
+        layout.addRow(QLabel("Unidade de Medida:"), self.unidade_medida_field)
+
         return layout

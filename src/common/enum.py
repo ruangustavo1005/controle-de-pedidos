@@ -7,5 +7,5 @@ class BaseEnum(Enum):
         self._description = description
 
     @property
-    def description(self):
+    def description(self) -> str:
         return self._description

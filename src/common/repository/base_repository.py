@@ -1,7 +1,8 @@
 import sqlite3
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Type
 
+from common.enum import BaseEnum
 from common.repository.connection import Connection
 
 
@@ -104,6 +105,17 @@ class BaseRepository(ABC):
         except sqlite3.Error as e:
             print(f"Erro ao remover dados: {e}")
             return False
+
+    @classmethod
+    def _build_case_from_enum(
+        cls, column: str, enum: Type[BaseEnum], alias: str = None
+    ) -> str:
+        cases = [
+            f"WHEN {column} == '{item.value}' THEN '{item.description}'"
+            for item in enum
+        ]
+
+        return f"CASE {' '.join(cases)} ELSE {column} END AS {alias or column}"
 
     def _get_connection(self) -> sqlite3.Connection:
         return Connection.get_connection()

@@ -2,6 +2,7 @@ import sqlite3
 from typing import Any, Dict, List
 
 from common.repository.base_repository import BaseRepository
+from routes.produto.enum import ProdutoUnidadeMedidaEnum
 
 
 class ProdutoRepository(BaseRepository):
@@ -21,7 +22,7 @@ class ProdutoRepository(BaseRepository):
                 "id",
                 "nome",
                 "REPLACE(PRINTF('R$ %.2f', preco), '.', ',') AS preco",
-                "unidade_medida",
+                self._build_case_from_enum("unidade_medida", ProdutoUnidadeMedidaEnum),
                 f"(SELECT COUNT(1) FROM pedido_produto WHERE pedido_produto.produto_id = {self._table_name}.id) AS qtd_vendas",  # noqa: E501
             ]
         )

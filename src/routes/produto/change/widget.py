@@ -1,14 +1,14 @@
 from PySide6.QtCore import Qt
 
-from routes.cidade.add.widget import CidadeAddWidget
+from routes.produto.add.widget import ProdutoAddWidget
 
 
-class CidadeChangeWidget(CidadeAddWidget):
+class ProdutoChangeWidget(ProdutoAddWidget):
     def __init__(
         self,
-        title: str = "Alterar Cidade",
+        title: str = "Alterar Produto",
         width: int = 300,
-        height: int = 80,
+        height: int = 120,
         parent=None,
         flags=Qt.WindowFlags(),
     ):

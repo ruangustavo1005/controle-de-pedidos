@@ -1,7 +1,8 @@
 from typing import Any, List
 
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QComboBox, QHBoxLayout, QLabel, QLineEdit, QPushButton
+from PySide6.QtWidgets import (QComboBox, QHBoxLayout, QLabel, QLineEdit,
+                               QPushButton)
 
 from common.gui.widget.base_list_widget import BaseListWidget
 from routes.cidade.repository import CidadeRepository

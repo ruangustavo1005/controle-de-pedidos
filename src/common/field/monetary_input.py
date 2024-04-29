@@ -20,3 +20,9 @@ class MonetaryInput(QLineEdit):
             new_text = new_text[:-1] if len(new_text) > 1 else "0"
             new_text = new_text.zfill(2)
             self.setText(f"{int(new_text[:-2] or '0')},{new_text[-2:]}")
+
+    def valueAsFloat(self) -> float:
+        return float(self.text().replace(",", "."))
+
+    def setValueFromFloat(self, value: float) -> None:
+        self.setText("{:.2f}".format(value).replace(".", ","))

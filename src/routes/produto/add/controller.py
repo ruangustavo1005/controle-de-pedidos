@@ -15,15 +15,23 @@ class ProdutoAddController(BaseCRUDController):
 
     def execute_action(self) -> None:
         nome = self._widget.nome_field.text()
+        preco = self._widget.preco_field.valueAsFloat()
+        unidade_medida = self._widget.unidade_medida_field.currentData()
         if not nome:
-            self._widget.show_info_pop_up("Atenção", "O nome da cidade é obrigatório")
-        elif self._repository.add({"nome": nome.strip()}):
-            self._widget.show_info_pop_up("Sucesso", "Cidade criada com sucesso")
+            self._widget.show_info_pop_up("Atenção", "O nome do produto é obrigatório")
+            return
+        if preco == 0:
+            self._widget.show_info_pop_up("Atenção", "O preço do produto é obrigatório")
+            return
+        if self._repository.add(
+            {"nome": nome.strip(), "preco": preco, "unidade_medida": unidade_medida}
+        ):
+            self._widget.show_info_pop_up("Sucesso", "Produto criado com sucesso")
             self._caller.update_table_data()
             self._widget.close()
         else:
             self._widget.show_error_pop_up(
                 "Erro",
-                "Erro ao criar a cidade",
+                "Erro ao criar o produto",
                 "Por favor, entre em contato com o suporte",
             )

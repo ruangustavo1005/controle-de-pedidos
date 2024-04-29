@@ -15,7 +15,7 @@ class ProdutoRemoveController(BaseRemoveController):
         if self._repository.count_pedidos(self._data_id) == 0:
             option = BaseWidget.show_question_pop_up(
                 "Atenção",
-                "Deseja remover o Produto selecionada?",
+                "Deseja remover o Produto selecionado?",
                 "Essa ação não pode ser desfeita!",
             )
             if option == QMessageBox.StandardButton.Ok:
