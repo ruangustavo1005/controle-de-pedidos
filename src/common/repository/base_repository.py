@@ -106,6 +106,18 @@ class BaseRepository(ABC):
             print(f"Erro ao remover dados: {e}")
             return False
 
+    def list_for_combo_box(
+        self, desc_column: str, id_column: str, order: str = "2 ASC"
+    ) -> List[Dict[str, Any]]:
+        sql = f"SELECT {id_column}, {desc_column} FROM {self._table_name} ORDER BY {order}"
+
+        cursor = self._get_connection().cursor()
+        cursor.execute(sql)
+        results = cursor.fetchall()
+
+        cursor.close()
+        return results
+
     @classmethod
     def _build_case_from_enum(
         cls, column: str, enum: Type[BaseEnum], alias: str = None

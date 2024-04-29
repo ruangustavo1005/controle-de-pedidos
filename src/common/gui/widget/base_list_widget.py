@@ -2,8 +2,15 @@ from typing import List
 
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QIntValidator
-from PySide6.QtWidgets import (QAbstractItemView, QHBoxLayout, QLabel,
-                               QLineEdit, QPushButton, QTableView, QVBoxLayout)
+from PySide6.QtWidgets import (
+    QAbstractItemView,
+    QHBoxLayout,
+    QLabel,
+    QLineEdit,
+    QPushButton,
+    QTableView,
+    QVBoxLayout,
+)
 
 from common.gui.core.table_model_default import TableModelDefault
 from common.gui.widget.base_widget import BaseWidget
@@ -89,8 +96,8 @@ class BaseListWidget(BaseWidget):
         self.table = QTableView()
         self.table.setModel(self.table_model)
         self.table.resizeRowsToContents()
-        self.table.setSelectionBehavior(QAbstractItemView.SelectRows)
-        self.table.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+        self.table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
         layout.addWidget(self.table)
 
         return layout

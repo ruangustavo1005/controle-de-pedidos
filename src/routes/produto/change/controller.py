@@ -12,14 +12,9 @@ class ProdutoChangeController(BaseChangeController):
         if data:
             self._widget.nome_field.setText(data.get("nome"))
             self._widget.preco_field.setValueFromFloat(data.get("preco"))
-
-            unidade_medida = data.get("unidade_medida")
-            index = next(
-                i
-                for i in range(self._widget.unidade_medida_field.count())
-                if self._widget.unidade_medida_field.itemData(i) == unidade_medida
+            self._widget.unidade_medida_field.setCurrentIndexByData(
+                data.get("unidade_medida")
             )
-            self._widget.unidade_medida_field.setCurrentIndex(index)
 
     def _get_widget_instance(self) -> ProdutoChangeWidget:
         return ProdutoChangeWidget()
