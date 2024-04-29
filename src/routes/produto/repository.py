@@ -22,7 +22,7 @@ class ProdutoRepository(BaseRepository):
                 "nome",
                 "REPLACE(PRINTF('R$ %.2f', preco), '.', ',') AS preco",
                 "unidade_medida",
-                f"(SELECT COUNT(1) FROM pedido_produto WHERE pedido_produto.produto_id = {self._table_name}.id) AS qtd_vendas",
+                f"(SELECT COUNT(1) FROM pedido_produto WHERE pedido_produto.produto_id = {self._table_name}.id) AS qtd_vendas",  # noqa: E501
             ]
         )
         order = "LOWER(nome) ASC"

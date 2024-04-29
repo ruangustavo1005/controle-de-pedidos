@@ -14,7 +14,7 @@ class MonetaryInput(QLineEdit):
         if event.text().isdigit():
             new_text = self.text().replace(",", "") + event.text()
             new_text = new_text.zfill(2)
-            self.setText(f"{int(new_text[:-2] or "0")},{new_text[-2:]}")
+            self.setText(f"{int(new_text[:-2] or '0')},{new_text[-2:]}")
         elif event.key() == Qt.Key.Key_Backspace:
             new_text = self.text().replace(",", "")
             new_text = new_text[:-1] if len(new_text) > 1 else "0"
