@@ -2,9 +2,11 @@ from typing import Any, List
 
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QAction, QCloseEvent, QIcon
-from PySide6.QtWidgets import QApplication, QMenuBar
+from PySide6.QtWidgets import QApplication, QHBoxLayout, QMenuBar, QLabel
 
+from common.gui.field.combo_box import ComboBox
 from common.gui.widget.base_list_widget import BaseListWidget
+from routes.cidade.repository import CidadeRepository
 from settings import FAV_ICON_FILE_NAME
 
 
@@ -56,3 +58,19 @@ class MenuWidget(BaseListWidget):
         self.add_button.hide()
         self.change_button.hide()
         self.remove_button.hide()
+
+    def _create_filter_fields(self, filter_area_layout: QHBoxLayout) -> None:
+        cidade_label = QLabel("Cidade:")
+        cidade_label.setFixedWidth(45)
+        filter_area_layout.addWidget(cidade_label)
+
+        self.cidade_filter = ComboBox()
+        self.cidade_filter.setFixedWidth(150)
+        self.cidade_filter.addItem("", None)
+        cidade_repository = CidadeRepository()
+        for cidade in cidade_repository.list_for_combo_box(
+            desc_column="nome", id_column="id"
+        ):
+            self.cidade_filter.addItem(cidade["nome"], cidade["id"])
+        filter_area_layout.addWidget(self.cidade_filter)
+

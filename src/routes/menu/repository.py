@@ -19,7 +19,7 @@ class MenuRepository(BaseRepository):
     ) -> List[List[Any]]:
         offset = (page - 1) * limit
 
-        sql = """
+        sql = f"""
 SELECT produto.id AS produto_id,
        produto.nome AS produto_nome,
        SUM(pedido_produto.quantidade) || " " || produto.unidade_medida AS quantidade
@@ -28,7 +28,11 @@ SELECT produto.id AS produto_id,
     ON produto.id = pedido_produto.produto_id
   JOIN pedido
     ON pedido.id = pedido_produto.pedido_id
- WHERE pedido.status = ?
+  JOIN cliente
+    ON cliente.id = pedido.cliente_id
+  JOIN cidade
+    ON cidade.id = cliente.cidade_id
+ WHERE pedido.status = ? AND {filter}
  GROUP BY 1, 2
  ORDER BY 2
  LIMIT ?

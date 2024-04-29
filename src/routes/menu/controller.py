@@ -15,6 +15,12 @@ class MenuController(BaseListController):
     def __init__(self, caller: BaseController | None = None) -> None:
         super().__init__(rows_per_page=20, caller=caller)
 
+    def _build_list_filter(self) -> str:
+        cidade_id_filter = self._widget.cidade_filter.currentData()
+        if cidade_id_filter:
+            return f"cidade.id = {cidade_id_filter}"
+        return super()._build_list_filter()
+
     def _set_widget_connections(self) -> None:
         super()._set_widget_connections()
         self._widget.cidade_menu_item.triggered.connect(
