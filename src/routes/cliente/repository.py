@@ -21,8 +21,8 @@ class ClienteRepository(BaseRepository):
                 "id",
                 "nome",
                 "telefone",
-                f"(SELECT cidade.nome FROM cidade WHERE cidade.id = {self._table_name}.cidade_id) as nome_cidade",
-                f"(SELECT COUNT(1) FROM pedido WHERE pedido.cliente_id = {self._table_name}.id) as qtd_pedidos",
+                f"(SELECT cidade.nome FROM cidade WHERE cidade.id = {self._table_name}.cidade_id) AS nome_cidade",
+                f"(SELECT COUNT(1) FROM pedido WHERE pedido.cliente_id = {self._table_name}.id) AS qtd_pedidos",
             ]
         )
         order = "LOWER(nome) ASC"

@@ -36,7 +36,7 @@ OFFSET ?;
         """
 
         cursor = self._get_connection().cursor()
-        cursor.execute(sql, (PedidoStatusEnum.EM_PRODUCAO, limit, offset))
+        cursor.execute(sql, (PedidoStatusEnum.EM_PRODUCAO.value, limit, offset))
         results = cursor.fetchall()
 
         items = [list(row) for row in results]
@@ -61,7 +61,7 @@ SELECT COUNT(1) AS count FROM origin;
         """
 
         cursor = self._get_connection().cursor()
-        cursor.execute(sql, (PedidoStatusEnum.EM_PRODUCAO,))
+        cursor.execute(sql, (PedidoStatusEnum.EM_PRODUCAO.value,))
         results: sqlite3.Row = cursor.fetchone()
 
         count = results["count"]

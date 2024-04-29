@@ -1,7 +1,8 @@
 from typing import Any, List
 
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QHBoxLayout, QLabel, QLineEdit, QComboBox, QPushButton
+from PySide6.QtWidgets import (QComboBox, QHBoxLayout, QLabel, QLineEdit,
+                               QPushButton)
 
 from common.gui.widget.base_list_widget import BaseListWidget
 from routes.cidade.repository import CidadeRepository
@@ -30,7 +31,7 @@ class ClienteListWidget(BaseListWidget):
 
     def _create_actions_area(self) -> QHBoxLayout:
         layout = super()._create_actions_area()
-        
+
         self.whatsapp_button = QPushButton("Chamar no WhatsApp")
         self.whatsapp_button.setFixedWidth(150)
         layout.addWidget(self.whatsapp_button)
@@ -53,7 +54,7 @@ class ClienteListWidget(BaseListWidget):
         self.nome_filter = QLineEdit()
         self.nome_filter.setFixedWidth(100)
         filter_area_layout.addWidget(self.nome_filter)
-        
+
         cidade_label = QLabel("Cidade:")
         cidade_label.setFixedWidth(55)
         filter_area_layout.addWidget(cidade_label)
@@ -65,4 +66,3 @@ class ClienteListWidget(BaseListWidget):
         for cidade in cidade_repository.list_for_combo_box():
             self.cidade_filter.addItem(cidade["nome"], cidade["id"])
         filter_area_layout.addWidget(self.cidade_filter)
-        

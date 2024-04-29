@@ -2,7 +2,6 @@ from PySide6.QtWidgets import QMessageBox
 
 from common.controller.base_remove_controller import BaseRemoveController
 from common.gui.widget.base_widget import BaseWidget
-from routes.cidade.repository import CidadeRepository
 from routes.cliente.repository import ClienteRepository
 
 
@@ -16,7 +15,7 @@ class ClienteRemoveController(BaseRemoveController):
         if self._repository.count_pedidos(self._data_id) == 0:
             option = BaseWidget.show_question_pop_up(
                 "Atenção",
-                "Deseja remove a Cliente selecionado?",
+                "Deseja remover a Cliente selecionado?",
                 "Essa ação não pode ser desfeita!",
             )
             if option == QMessageBox.StandardButton.Ok:

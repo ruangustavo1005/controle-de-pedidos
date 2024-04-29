@@ -2,11 +2,12 @@ import sqlite3
 from typing import Any, Dict, List
 
 from common.repository.base_repository import BaseRepository
+from routes.produto.enum import ProdutoUnidadeMedidaEnum
 
 
-class CidadeRepository(BaseRepository):
+class ProdutoRepository(BaseRepository):
     def _get_table_name(self) -> str:
-        return "cidade"
+        return "produto"
 
     def list(
         self,
@@ -20,14 +21,16 @@ class CidadeRepository(BaseRepository):
             [
                 "id",
                 "nome",
-                f"(SELECT COUNT(1) FROM cliente WHERE cliente.cidade_id = {self._table_name}.id) AS qtd_clientes",
+                "REPLACE(PRINTF('R$ %.2f', preco), '.', ',') AS preco",
+                self._build_case_from_enum("unidade_medida", ProdutoUnidadeMedidaEnum),
+                f"(SELECT COUNT(1) FROM pedido_produto WHERE pedido_produto.produto_id = {self._table_name}.id) AS qtd_vendas",  # noqa: E501
             ]
         )
         order = "LOWER(nome) ASC"
         return super().list(page, limit, columns, order, filter)
 
-    def count_clientes(self, id: int) -> int:
-        sql = "SELECT COUNT(1) AS count FROM cliente WHERE cidade_id = ?"
+    def count_pedidos(self, id: int) -> int:
+        sql = "SELECT COUNT(1) AS count FROM pedido_produto WHERE pedido_produto.produto_id = ?"
 
         cursor = self._get_connection().cursor()
         cursor.execute(sql, (id,))
