@@ -42,7 +42,7 @@ class ProdutoRepository(BaseRepository):
         return count
 
     def list_for_combo_box(self) -> List[Dict[str, Any]]:
-        sql = f"SELECT id, nome FROM {self._table_name} ORDER BY nome"
+        sql = f"SELECT id, nome, preco FROM {self._table_name} ORDER BY 2 ASC"
 
         cursor = self._get_connection().cursor()
         cursor.execute(sql)

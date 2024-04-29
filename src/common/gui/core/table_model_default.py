@@ -1,7 +1,6 @@
 from typing import Any, List, Union
 
-from PySide6.QtCore import (QAbstractTableModel, QModelIndex,
-                            QPersistentModelIndex, Qt)
+from PySide6.QtCore import QAbstractTableModel, QModelIndex, QPersistentModelIndex, Qt
 
 
 class TableModelDefault(QAbstractTableModel):

@@ -1,5 +1,5 @@
 import sqlite3
-from typing import Any, Dict, List
+from typing import Any, List
 
 from common.repository.base_repository import BaseRepository
 
@@ -37,13 +37,3 @@ class CidadeRepository(BaseRepository):
 
         cursor.close()
         return count
-
-    def list_for_combo_box(self) -> List[Dict[str, Any]]:
-        sql = f"SELECT id, nome FROM {self._table_name} ORDER BY nome"
-
-        cursor = self._get_connection().cursor()
-        cursor.execute(sql)
-        results = cursor.fetchall()
-
-        cursor.close()
-        return results

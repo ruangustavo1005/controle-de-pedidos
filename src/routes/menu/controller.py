@@ -4,6 +4,7 @@ from routes.cidade.list.controller import CidadeListController
 from routes.cliente.list.controller import ClienteListController
 from routes.menu.repository import MenuRepository
 from routes.menu.widget import MenuWidget
+from routes.pedido.list.controller import PedidoListController
 from routes.produto.list.controller import ProdutoListController
 
 
@@ -25,6 +26,9 @@ class MenuController(BaseListController):
         self._widget.produto_menu_item.triggered.connect(
             self.__produto_menu_item_triggered
         )
+        self._widget.pedido_menu_item.triggered.connect(
+            self.__pedido_menu_item_triggered
+        )
 
     def __cidade_menu_item_triggered(self) -> None:
         self.cidade_list_controller = CidadeListController(self)
@@ -37,6 +41,10 @@ class MenuController(BaseListController):
     def __produto_menu_item_triggered(self) -> None:
         self.produto_list_controller = ProdutoListController(self)
         self.produto_list_controller.show()
+
+    def __pedido_menu_item_triggered(self) -> None:
+        self.pedido_list_controller = PedidoListController(self)
+        self.pedido_list_controller.show()
 
     def _get_widget_instance(self) -> MenuWidget:
         return MenuWidget()

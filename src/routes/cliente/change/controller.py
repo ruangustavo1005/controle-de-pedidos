@@ -12,14 +12,7 @@ class ClienteChangeController(BaseChangeController):
         if data:
             self._widget.nome_field.setText(data.get("nome"))
             self._widget.telefone_field.setText(data.get("telefone", ""))
-
-            cidade_id = data.get("cidade_id")
-            index = next(
-                i
-                for i in range(self._widget.cidade_field.count())
-                if self._widget.cidade_field.itemData(i) == cidade_id
-            )
-            self._widget.cidade_field.setCurrentIndex(index)
+            self._widget.cidade_field.setCurrentIndexByData(data.get("cidade_id"))
 
     def _get_widget_instance(self) -> ClienteChangeWidget:
         return ClienteChangeWidget()
