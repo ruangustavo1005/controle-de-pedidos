@@ -12,11 +12,11 @@ gerenciador de pedidos que controla quantidade de produtos a serem produzidos
   - [x] pode ser alterado ou excluído (caso não tenha pedidos relacionados)
   - [x] a listagem deve conter o nome, telefone (com link para o whatsapp), cidade e quantidade de pedidos relacionas àquele cliente
   - [x] a listagem deve permitir filtrar por nome e cidade
-- [ ] listagem e manutenção de produtos
-  - [ ] para o cadastro dos produtos, deve ter obrigatóriamente o nome, preço e unidade de medida (kg ou lata)
-  - [ ] pode ser alterado ou excluído (caso não tenha pedidos relacionados)
-  - [ ] a listagem deve conter o nome do produto, unidade de medida, preço e quantidade já vendida (status do pedido = "entregue")
-  - [ ] a listagem deve permitir filtrar por nome
+- [x] listagem e manutenção de produtos
+  - [x] para o cadastro dos produtos, deve ter obrigatóriamente o nome, preço e unidade de medida (kg ou lata)
+  - [x] pode ser alterado ou excluído (caso não tenha pedidos relacionados)
+  - [x] a listagem deve conter o nome do produto, unidade de medida, preço e quantidade já vendida (status do pedido = "entregue")
+  - [x] a listagem deve permitir filtrar por nome
 - [ ] listagem e manutenção de pedidos
   - [ ] para o cadastro de pedidos, deve ser escolhido um cliente, 1 ou mais produtos e uma quantidade para cada produto, além da data e hora do pedido (por padrão data e hora atuais), e o pedido também terá um status, sendo "em produção", "feito" ou "entregue" (por padrão o primeiro)
   - [ ] pode ser visualizado, excluído ou alterado somente o status
