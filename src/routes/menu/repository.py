@@ -3,6 +3,7 @@ from typing import Any, List
 
 from common.repository.base_repository import BaseRepository
 from routes.pedido.enum import PedidoStatusEnum
+from routes.produto.enum import ProdutoUnidadeMedidaEnum
 
 
 class MenuRepository(BaseRepository):
@@ -22,7 +23,7 @@ class MenuRepository(BaseRepository):
         sql = f"""
 SELECT produto.id AS produto_id,
        produto.nome AS produto_nome,
-       SUM(pedido_produto.quantidade) || " " || produto.unidade_medida AS quantidade
+       REPLACE(SUM(pedido_produto.quantidade) || " " || {self._build_case_from_enum("produto.unidade_medida", ProdutoUnidadeMedidaEnum)}, '.', ',') AS quantidade
   FROM pedido_produto
   JOIN produto
     ON produto.id = pedido_produto.produto_id

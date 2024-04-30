@@ -22,7 +22,7 @@ class ProdutoRepository(BaseRepository):
                 "id",
                 "nome",
                 "REPLACE(PRINTF('R$ %.2f', preco), '.', ',') AS preco",
-                self._build_case_from_enum("unidade_medida", ProdutoUnidadeMedidaEnum),
+                self._build_case_from_enum("unidade_medida", ProdutoUnidadeMedidaEnum, "unidade_medida"),
                 f"(SELECT COUNT(1) FROM pedido_produto WHERE pedido_produto.produto_id = {self._table_name}.id) AS qtd_vendas",  # noqa: E501
             ]
         )
@@ -42,7 +42,14 @@ class ProdutoRepository(BaseRepository):
         return count
 
     def list_for_combo_box(self) -> List[Dict[str, Any]]:
-        sql = f"SELECT id, nome, preco FROM {self._table_name} ORDER BY 2 ASC"
+        sql = f"""
+SELECT id,
+       nome,
+       {self._build_case_from_enum('unidade_medida', ProdutoUnidadeMedidaEnum, 'unidade_medida')},
+       preco
+  FROM {self._table_name}
+ ORDER BY 2 ASC
+        """
 
         cursor = self._get_connection().cursor()
         cursor.execute(sql)

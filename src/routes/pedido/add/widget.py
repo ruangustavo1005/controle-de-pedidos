@@ -1,7 +1,7 @@
 from typing import List
 
 from PySide6.QtCore import QDateTime, QModelIndex, Qt
-from PySide6.QtGui import QIntValidator
+from PySide6.QtGui import QDoubleValidator
 from PySide6.QtWidgets import (
     QAbstractItemView,
     QDateTimeEdit,
@@ -18,6 +18,7 @@ from common.gui.core.table_model_default import TableModelDefault
 from common.gui.field.combo_box import ComboBox
 from common.gui.widget.base_crud_widget import BaseCRUDWidget
 from common.utils.currency import CurrencyUtils
+from common.utils.number_utils import NumberUtils
 from routes.cliente.repository import ClienteRepository
 from routes.pedido.enum import PedidoStatusEnum
 from routes.produto.repository import ProdutoRepository
@@ -100,10 +101,11 @@ class PedidoAddWidget(BaseCRUDWidget):
         produto_repository = ProdutoRepository()
         for produto in produto_repository.list_for_combo_box():
             self._produto_to_add_field.addItem(
-                produto["nome"],
+                f"{produto['nome']} ({produto['unidade_medida']})",
                 {
                     "id": produto["id"],
                     "nome": produto["nome"],
+                    "unidade_medida": produto["unidade_medida"],
                     "preco": produto["preco"],
                 },
             )
@@ -114,7 +116,7 @@ class PedidoAddWidget(BaseCRUDWidget):
         product_to_add_layout.addWidget(self._qtd_label)
 
         self._qtd_to_add_field = QLineEdit()
-        self._qtd_to_add_field.setValidator(QIntValidator())
+        self._qtd_to_add_field.setValidator(QDoubleValidator())
         self._qtd_to_add_field.setFixedWidth(40)
         product_to_add_layout.addWidget(self._qtd_to_add_field)
 
@@ -173,25 +175,28 @@ class PedidoAddWidget(BaseCRUDWidget):
 
     def __add_produto_button_clicked(self) -> None:
         produto: dict = self._produto_to_add_field.currentData()
-        quantidade = int(self._qtd_to_add_field.text() or 0)
+        quantidade = NumberUtils.str_to_float(self._qtd_to_add_field.text() or "0")
 
         if produto and quantidade:
             id_produto = produto.get("id")
 
             if self.table_produtos_data.get(id_produto):
-                self.table_produtos_data[id_produto][2] += quantidade
+                self.table_produtos_data[id_produto][2] = NumberUtils.float_to_str(
+                    NumberUtils.str_to_float(self.table_produtos_data[id_produto][2])
+                    + quantidade
+                )
             else:
                 self.table_produtos_data[id_produto] = [
                     produto.get("id"),
-                    produto.get("nome"),
-                    quantidade,
+                    f"{produto.get('nome')} ({produto.get('unidade_medida')})",
+                    NumberUtils.float_to_str(quantidade),
                     produto.get("preco"),
                     CurrencyUtils.float_to_view(produto.get("preco")),
                     None,
                 ]
 
             subtotal = (
-                self.table_produtos_data.get(id_produto)[2]
+                NumberUtils.str_to_float(self.table_produtos_data[id_produto][2])
                 * self.table_produtos_data.get(id_produto)[3]
             )
             self.table_produtos_data[id_produto][5] = CurrencyUtils.float_to_view(
@@ -213,5 +218,10 @@ class PedidoAddWidget(BaseCRUDWidget):
         self.__update_valor_total_pedido()
 
     def __update_valor_total_pedido(self) -> None:
-        total = sum([item[2] * item[3] for item in self.table_produtos_data.values()])
+        total = sum(
+            [
+                NumberUtils.str_to_float(item[2]) * item[3]
+                for item in self.table_produtos_data.values()
+            ]
+        )
         self.__valor_total_pedido_field.setText(CurrencyUtils.float_to_view(total))
