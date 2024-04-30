@@ -2,7 +2,7 @@ from typing import Any, List
 
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QAction, QCloseEvent, QIcon
-from PySide6.QtWidgets import QApplication, QHBoxLayout, QMenuBar, QLabel
+from PySide6.QtWidgets import QApplication, QHBoxLayout, QLabel, QMenuBar
 
 from common.gui.field.combo_box import ComboBox
 from common.gui.widget.base_list_widget import BaseListWidget
@@ -73,4 +73,3 @@ class MenuWidget(BaseListWidget):
         ):
             self.cidade_filter.addItem(cidade["nome"], cidade["id"])
         filter_area_layout.addWidget(self.cidade_filter)
-

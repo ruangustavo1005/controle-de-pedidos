@@ -28,7 +28,11 @@ class ClienteChangeController(BaseChangeController):
             self._widget.show_info_pop_up("Atenção", "O nome do cliente é obrigatório")
         elif self._repository.change(
             self._data_id,
-            {"nome": nome.strip(), "cidade_id": cidade, "telefone": telefone.strip() or None},
+            {
+                "nome": nome.strip(),
+                "cidade_id": cidade,
+                "telefone": telefone.strip() or None,
+            },
         ):
             self._widget.show_info_pop_up("Sucesso", "Cliente alterado com sucesso")
             self._caller.update_table_data()

@@ -59,4 +59,4 @@ class ClienteListController(BaseListController):
 
     def __whatsapp_button_clicked(self) -> None:
         phone = "".join(re.findall(r"\d+", self._selected_data[2]))
-        QDesktopServices.openUrl(QUrl(f"https://web.whatsapp.com/send?phone={phone}"))
+        QDesktopServices.openUrl(QUrl(f"https://wa.me/{phone}"))
