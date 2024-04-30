@@ -127,7 +127,7 @@ class BaseRepository(ABC):
             for item in enum
         ]
 
-        return f"CASE {' '.join(cases)} ELSE {column} END AS {alias or column}"
+        return f"CASE {' '.join(cases)} ELSE {column} END{f' AS {alias}' if alias else ''}"
 
     def _get_connection(self) -> sqlite3.Connection:
         return Connection.get_connection()

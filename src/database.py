@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS pedido (
 CREATE TABLE IF NOT EXISTS pedido_produto (
     pedido_id INTEGER,
     produto_id INTEGER,
-    quantidade INTEGER NOT NULL,
+    quantidade REAL NOT NULL,
     preco_unitario REAL NOT NULL,
     FOREIGN KEY(pedido_id) REFERENCES pedido(id) ON DELETE CASCADE,
     FOREIGN KEY(produto_id) REFERENCES produto(id) ON DELETE CASCADE,

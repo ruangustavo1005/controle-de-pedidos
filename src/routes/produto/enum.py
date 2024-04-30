@@ -2,5 +2,5 @@ from common.enum import BaseEnum
 
 
 class ProdutoUnidadeMedidaEnum(BaseEnum):
-    PACOTE = ("pacote", "Pacote")
+    BALDE = ("balde", "Balde")
     KG = ("kg", "KG")

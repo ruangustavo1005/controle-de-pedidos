@@ -3,7 +3,9 @@ import sqlite3
 from typing import Any, Dict, List
 
 from common.repository.base_repository import BaseRepository
+from common.utils.number_utils import NumberUtils
 from routes.pedido.enum import PedidoStatusEnum
+from routes.produto.enum import ProdutoUnidadeMedidaEnum
 
 
 class PedidoRepository(BaseRepository):
@@ -87,7 +89,7 @@ SELECT COUNT(1) AS count
 
             for produto in produtos:
                 sql = "INSERT INTO pedido_produto (pedido_id, produto_id, quantidade, preco_unitario) VALUES (?, ?, ?, ?)"
-                cursor.execute(sql, (id_pedido, produto[0], produto[2], produto[3]))
+                cursor.execute(sql, (id_pedido, produto[0], NumberUtils.str_to_float(produto[2]), produto[3]))
 
             self._get_connection().commit()
             cursor.close()
@@ -97,7 +99,7 @@ SELECT COUNT(1) AS count
             return False
 
     def find(self, id: int) -> Dict | None:
-        sql = """
+        sql = f"""
 SELECT pedido.data_hora,
        pedido.status,
        pedido.cliente_id,
@@ -105,8 +107,8 @@ SELECT pedido.data_hora,
            produto.id,
            json_array(
                produto.id,
-               produto.nome,
-               pedido_produto.quantidade,
+               produto.nome || ' (' || ({self._build_case_from_enum('produto.unidade_medida', ProdutoUnidadeMedidaEnum)}) || ')',
+               REPLACE(pedido_produto.quantidade, '.', ','),
                pedido_produto.preco_unitario,
                REPLACE(PRINTF('R$ %.2f', pedido_produto.preco_unitario), '.', ','),
                REPLACE(PRINTF('R$ %.2f', pedido_produto.quantidade * pedido_produto.preco_unitario), '.', ',')
