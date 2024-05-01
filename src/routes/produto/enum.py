@@ -6,3 +6,4 @@ class ProdutoUnidadeMedidaEnum(BaseEnum):
     BALDE = ("balde", "Balde")
     MEIO_KG = ("meio-kg", "Meio KG")
     KG = ("kg", "KG")
+    UNIDADE = ("unidade", "Unidade")
